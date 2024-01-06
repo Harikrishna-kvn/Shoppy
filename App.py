@@ -1,10 +1,10 @@
-from flask import Flask
+FROM python:3.8
 
-app = Flask(__name__)
+WORKDIR /app
 
-@app.route('/')
-def hello():
-    return 'Hello, Dockerized Flask App!'
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+COPY . .
+
+CMD ["python", "app.py"]
